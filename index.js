@@ -9,7 +9,7 @@ const webAppUrl = 'https://bugalteria.netlify.app/';
 app.get("/", (req, res) => {
     res.send("Bot в шоке");
 });
-const port = 3000;
+const port = 8000;
 app.listen(port, () => {
     console.log('Server running at http://localhost:${port}');
 })
