@@ -6,6 +6,8 @@ const app = express();
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const webAppUrl = 'https://bugalteria.netlify.app/';
 
+let startCount = 0; // Инициализация счетчика
+
 app.get("/", (req, res) => {
     res.send("Bot в шоке");
 });
@@ -26,6 +28,7 @@ bot.on('message', async (msg) => {
     const text = msg.text;
 
     if (text === '/start') {
+        startCount++; // Увеличение счетчика
         await bot.sendMessage(chatId, 'Добро пожаловать!', {
             reply_markup: {
                 inline_keyboard: [
@@ -33,6 +36,8 @@ bot.on('message', async (msg) => {
                 ]
             }
         });
+    } else if (text === '/count') {
+        await bot.sendMessage(chatId, `Бот был запущен ${startCount} раз(а).`);
     } else {
         return;
     }
